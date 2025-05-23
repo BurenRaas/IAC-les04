@@ -1,0 +1,69 @@
+- name: Update alle packages op guest
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt cache en upgrade alle packages
+      ansible.builtin.apt:
+        update_cache: true
+        name: "*"
+        state: latest
+
+    - name: Voeg ESX host toe aan /etc/hosts
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        line: "192.168.20.14 esxi"
+        create: yes
+
+    - name: Voeg user 'test' toe
+      ansible.builtin.user:
+        name: test
+        state: present
+
+    - name: Kopieer lokaal bestand naar guest
+      ansible.builtin.copy:
+        src: ./main.tf      
+        dest: /tmp/main.tf   
+        mode: '0644'
+
+    - name: Voeg cronjob toe voor dagelijkse backup naar /tmp
+      ansible.builtin.cron:
+        name: "Dagelijkse backup naar /tmp"
+        user: root
+        state: present
+        minute: "0"
+        hour: "2"
+        job: "mkdir -p /tmp/backup && cp -a /etc /tmp/backup/ && cp -a /var/www/ /tmp/backup/"
+
+- name: Installeer nginx op webservers
+  hosts: webserver
+  become: yes
+
+  tasks:
+    - name: Installeer nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Start en enable nginx service
+      ansible.builtin.service:
+        name: nginx 
+        state: started
+        enabled: yes    
+
+- name: Installeer mariadb op databaseservers
+  hosts: databaseservers
+  become: yes
+
+  tasks:
+    - name: Installeer mariadb-server
+      ansible.builtin.apt:
+        name: mariadb-server
+        state: present
+
+    - name: Start en enable mariadb service
+      ansible.builtin.service:
+        name: mariadb 
+        state: started
+        enabled: yes
+    
