@@ -1,0 +1,46 @@
+- name: Install MySQL server
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+
+- name: Install PyMySQL
+  apt:
+    name: python3-pymysql
+    state: present
+    update_cache: yes
+
+- name: Create /root/.my.cnf for socket access
+  become: true
+  copy:
+    dest: /root/.my.cnf
+    content: |
+      [client]
+      user=root
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: Ensure MySQL root user uses auth_socket
+  become: true
+  shell: |
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket; FLUSH PRIVILEGES;"
+  args:
+    executable: /bin/bash
+  ignore_errors: yes
+
+- name: Create dbuser via socket
+  become: true
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "*.*:ALL"
+    host: "%"
+    state: present
+    login_unix_socket: /run/mysqld/mysqld.sock
+
+- name: Start mysql
+  service:
+    name: mysql
+    state: started
+    enabled: yes

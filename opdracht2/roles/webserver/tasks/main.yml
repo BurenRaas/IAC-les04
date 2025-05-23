@@ -1,0 +1,11 @@
+- name: Install Apache
+  apt:
+    name: "{{ apache_packages }}"
+    state: present
+    update_cache: yes
+  notify: restart apache
+
+- name: webpagina
+  copy:
+    content: "<h1>IAC week 4 opdracht 1</h1>"
+    dest: /var/www/html/index.html
