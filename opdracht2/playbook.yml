@@ -1,12 +1,10 @@
 ---
-- name: Configure webservers
-  hosts: webserver
+- hosts: all
   become: yes
-  roles:
-    - webserver
 
-- name: Configure DB servers
-  hosts: databaseserver
-  become: yes
+  vars:
+    node_npm_modules:
+      - jslint
+
   roles:
-    - databaseserver
+    - nodejs
