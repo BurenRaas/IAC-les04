@@ -18,3 +18,5 @@ https://docs.ansible.com/ansible/latest/collections/ansible/builtin/cron_module.
 Ansible start service
 https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html
 
+AI prompt: foutmelding bij het aanmaken van een mysql_user tijdens Ansible playbook
+https://chatgpt.com/share/68302b8d-e550-8007-9ec3-d425194f8e80
