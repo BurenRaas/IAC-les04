@@ -1,0 +1,20 @@
+- name: Install MySQL server
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+  notify: restart mysql
+
+- name: Create dbuser
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "*.*:ALL"
+    host: "%"
+    state: present
+
+- name: Start mysql
+  service:
+    name: mysql
+    state: started
+    enabled: yes
