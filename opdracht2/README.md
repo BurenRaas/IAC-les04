@@ -23,6 +23,7 @@ Dit project is onderdeel van een lab-opdracht waarin gebruik wordt gemaakt van A
 - Onderzoek wat Ansible Galaxy is.
 - Upload je gemaakte role naar Ansible Galaxy via een GitHub-repository.
 - Maak een playbook dat je gepubliceerde role gebruikt.
+Opdracht: Maak nu opdracht 2: Maak een role en playbook waarin je NodeJS installeert en installeer het nodejs package jslint.
 
 
 ---
