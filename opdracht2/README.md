@@ -8,16 +8,6 @@ Ruben Baas s1190828
 ## Beschrijving van de opdracht
 Dit project is onderdeel van een lab-opdracht waarin gebruik wordt gemaakt van Ansible om automatisch een webserver en een database server te configureren.
 
-**Opdracht 1:**
-- Deploy twee VM's (bijvoorbeeld via VirtualBox of VMware).
-- Gebruik een Ansible-inventory om IP-adressen en hostnamen van beide VM's te beheren.
-- Schrijf Ansible roles:
-  - Voor de webserver (vm1): installeer `apache2`, `php`, en `php-mysql`.
-  - Voor de database server (vm2): installeer `mysql-server`.
-- De Ansible-inventory bevat groepsvariabelen en individuele host-variabelen.
-- De `dbuser` en `dbpassword` worden gebruikt om verbinding te maken met de MySQL-database.
-- Gebruik `handlers` en `variables` in de roles.
-- Gebruik `group_vars` en `defaults`.
 
 **Opdracht 2:**
 - Onderzoek wat Ansible Galaxy is.
@@ -112,4 +102,6 @@ https://chatgpt.com/share/6831d7e5-24dc-8007-afb2-9af4d7bac823
 Ansible galaxy developer en user documenatie:
 https://docs.ansible.com/ansible/latest/galaxy/dev_guide.html
 https://docs.ansible.com/ansible/latest/galaxy/user_guide.html
+
+Anisble galaxy role: https://galaxy.ansible.com/ui/standalone/roles/BurenRaas/nodejs/
 
